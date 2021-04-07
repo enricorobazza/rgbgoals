@@ -29,7 +29,11 @@
      <script>
         let areas = JSON.parse("{{areas|queryset_as_json:user|escapejs}}")
         let form = `{% include './components/form_render.html' %}`
-        let urls = {'update_goal': `{% url 'update_goal' 0 %}`, 'delete_goal': `{% url 'delete_goal' 0 %}`}
+        let urls = {
+            'update_goal': `{% url 'update_goal' 0 %}`, 
+            'delete_goal': `{% url 'delete_goal' 0 %}`, 
+            'list_one_goal': `{% url 'list_one_goal' 0 %}`
+        }
 
         var context = {areas, form, urls};
     </script>

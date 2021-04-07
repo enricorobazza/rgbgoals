@@ -1,0 +1,38 @@
+{% extends '../base.html' %}
+
+{% load static %}
+{% load template_functions %}
+
+{% block scss %}
+    <link type="text/x-scss" href="{% static 'scss/table.scss' %}" rel="stylesheet" media="screen">
+{% endblock %}
+
+{% block body %}
+    {% include '../components/navbar.html' %}
+
+
+    <div class="container">
+        <h5><span class="font-weight-200">{{goal.area.name}}</span> | <span class="font-weight-300">{{goal.title}}</span></h5>
+
+        <div class="table-responsive mt-3">
+            <table class="table table-striped w-100">
+                <thead>
+                    <tr>
+                        <th>Valor</th>
+                        <th>Porcentagem</th>
+                        <th>Data</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for history in goal_history %}
+                        <tr>
+                            <th>{{history.value_display}}</th>
+                            <th>{{history.percentage_completed|format_percentage}}</th>
+                            <th>{{history.date|date:"d/m/Y"}}</th>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </table>
+    </div>
+{% endblock %}

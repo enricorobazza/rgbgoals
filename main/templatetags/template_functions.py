@@ -24,3 +24,7 @@ def queryset_as_json(queryset, user=None):
 def render_in_react(field):
     return 'react' in field.field.widget.attrs and field.field.widget.attrs['react'] == True
 
+@register.filter
+def format_percentage(percentage):
+    return "%d%%"%int(percentage*100)
+
