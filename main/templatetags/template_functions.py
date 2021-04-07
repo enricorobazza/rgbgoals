@@ -17,8 +17,8 @@ def form_as_json(form):
     return json.dumps(form_list)
 
 @register.filter
-def queryset_as_json(queryset):
-    return json.dumps([elem.as_dict() for elem in queryset])
+def queryset_as_json(queryset, user=None):
+    return json.dumps([elem.as_dict(user) for elem in queryset])
 
 @register.filter
 def render_in_react(field):

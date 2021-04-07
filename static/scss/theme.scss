@@ -1,0 +1,54 @@
+$primary:#FFE690;
+$secondary: #3FBEBC;
+$info: #5E08C1;
+$enable-rounded: true;
+$dark: #090116;
+$gray: #dee2e6;
+$light-yellow: #FFF1C1;
+
+$theme-colors: (
+  "info-light": adjust-color($info, $lightness: 20%),
+  "success-gradient-0": #7722a5,
+  "success-gradient-10": #5608C1,
+  "success-gradient-20": #2408C1,
+  "success-gradient-30": #0816C1,
+  "success-gradient-40": #0856C1,
+  "success-gradient-50": #0864C1,
+  "success-gradient-60": #0896C1,
+  "success-gradient-70": #08C1C1,
+  "success-gradient-80": #08C196,
+  "success-gradient-90": #08C196,
+  "success-gradient-100": #08C17A,
+);
+
+@import './bootstrap/scss/bootstrap.scss';
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+  font-family: 'Poppins';
+}
+
+.font-weight-100{
+  font-weight: 100;
+}
+
+.font-weight-200{
+  font-weight: 200;
+}
+
+.btnLogout:hover{
+    color: adjust-color($danger, $lightness: 15%) !important;
+}
+
+.bootstrap-select{
+  &.form-control{
+    margin-bottom: 20px;
+  }
+  .dropdown-menu li.selected a span{
+    color: #000 !important;
+  }
+  button{
+    background-color: #fff;
+    border: 1px solid #ced4da;
+  }
+}

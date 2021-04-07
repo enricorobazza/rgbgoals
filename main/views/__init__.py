@@ -28,7 +28,8 @@ class Index:
 
             if form.is_valid():
                 goal_history = form.save()
-                return JsonResponse({'success': True}, safe=False)
+                goal = Goal.objects.get(pk = goal_history.goal.pk)
+                return JsonResponse({'success': True, 'goal': goal.as_dict(request.user)}, safe=False)
             else:
                 return JsonResponse({"success": False, "errors": form.errors}, safe=False)
         

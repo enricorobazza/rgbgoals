@@ -3,17 +3,18 @@ import ReactDOM from 'react-dom';
 import Area from '../components/area';
 
 const Areas = ({areas, form, urls}) => {
-    console.log(form);
+    console.log(areas);
     return (
-        <div style={{padding: 30}}>
-            <h2>Áreas</h2>
-            {areas.map((area, i) => {
-                return <Area key={i}
-                            form={form}  
-                            area={area} 
-                            urls={urls}
-                        />
-            })}
+        <div className="container col-12 areas-container">
+            <div className="row p-0 w-100 m-0">
+                {areas.map((area, i) => {
+                    return <Area key={i}
+                                form={form}  
+                                area={area} 
+                                urls={urls}
+                            />
+                })}
+            </div>
         </div>
     )
 }

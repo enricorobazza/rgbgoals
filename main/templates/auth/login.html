@@ -1,0 +1,23 @@
+{% extends './base_login.html' %}
+{% load static %}
+
+{% block form %}
+    <form method="post">
+      {% csrf_token %}
+      <h1 class="h3 mb-4 font-weight-normal">
+        <img class="mr-2 mb-1" width="80px" height="80px" src="{% static 'images/icmc_logo_dark.png' %}"/><br /><b>RGB</b> Goals
+      </h1>
+      {{form.username.errors}}
+      <label for="inputEmail" class="sr-only">Usuário</label>
+      {{ form.username }} {{form.password.errors}}
+      <label for="inputPassword" class="sr-only">Senha</label>
+      {{ form.password }}
+      <span class="text-danger">
+        {{form.non_field_errors}}
+      </span>
+      <button class="btn btn-lg btn-info btn-block mt-3" type="submit">
+        Entrar
+      </button>
+      <p class="mt-5 mb-3 text-muted">&copy; ICMC Jr</p>
+    </form>
+{% endblock %}

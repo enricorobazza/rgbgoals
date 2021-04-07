@@ -1,0 +1,16 @@
+{% extends '../base.html' %}
+{% load static %}
+
+{% block scss %}
+   <link type="text/x-scss" href="{% static 'scss/login.scss' %}" rel="stylesheet" media="screen">
+{% endblock %}
+
+{% block body %}
+
+    <div class="background bg-dark">
+        <div class="card text-center col-md-4 bg-white">
+            {% block form %} {% endblock %}
+        </div>
+    </div>
+    
+{% endblock %}

@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 
 class Area(models.Model):
     name = models.CharField(max_length=20, unique=True)
+    icon = models.CharField(max_length=30, null=True, blank=True)
 
     class Meta:
         verbose_name_plural = "areas"
@@ -19,12 +20,14 @@ class Area(models.Model):
     def goals(self):
         return Goal.objects.filter(area = self.pk)
 
-    def as_dict(self):
+    def as_dict(self, user=None):
         return {
             'pk': self.pk,
             'name': self.name, 
-            'goals': [goal.as_dict() for goal in self.goals],
-            'percentage_completed': self.percentage_completed
+            'goals': [goal.as_dict(user) for goal in self.goals],
+            'percentage_completed': self.percentage_completed,
+            'icon': self.icon,
+            'has_perm': self.has_perm(user) if user is not None else False
         }
 
     @property
@@ -33,6 +36,9 @@ class Area(models.Model):
         if(len(goals) == 0):
             return 0
         return sum([goal.percentage_completed for goal in goals]) / len(goals)
+
+    def has_perm(self, user):
+        return len(AreaPermission.objects.filter(area = self.pk, user = user.pk)) > 0
         
 
 class Goal(models.Model):
@@ -52,7 +58,7 @@ class Goal(models.Model):
     def __str__(self):
         return self.title
 
-    def as_dict(self):
+    def as_dict(self, user = None):
         return {
             'pk': self.pk,
             'title': self.title, 
@@ -61,7 +67,8 @@ class Goal(models.Model):
             'value_type': self.value_type, 
             'due_date': str(self.due_date),
             'percentage_completed': self.percentage_completed,
-            'last_value': self.last_value
+            'last_value': self.last_value,
+            'has_perm': self.has_perm(user) if user is not None else False
         }
 
     @property
@@ -70,6 +77,11 @@ class Goal(models.Model):
             return 0
 
         return self.last_value / self.value
+
+    def has_perm(self, user):
+        if self.area.has_perm(user):
+            return True
+        return len(GoalPermission.objects.filter(goal = self.pk, user = user.pk)) > 0
     
     @property
     def last_value(self):
@@ -100,9 +112,10 @@ class AreaPermission(models.Model):
         verbose_name_plural = "areas_permissions"
         db_table="area_permisson"
         ordering = ['area', 'user']
+        unique_together = (('area', 'user'),)
     
     def __str__(self):
-        return str(area) + " - " + str(user)
+        return str(self.area) + " - " + str(self.user)
 
 class GoalPermission(models.Model):
     goal = models.ForeignKey(Goal, on_delete=models.CASCADE, related_name="permission")
@@ -112,6 +125,7 @@ class GoalPermission(models.Model):
         verbose_name_plural = "goals_permissions"
         db_table="goal_permission"
         ordering = ['goal', 'user']
+        unique_together = (('goal', 'user'),)
     
     def __str__(self):
-        return str(goal) + " - " + str(user)
+        return str(self.goal) + " - " + str(self.user)
