@@ -1,0 +1,45 @@
+{% load static %}
+{% load template_functions %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+    <title>RGB Goals</title>
+</head>
+
+
+<body>
+    <div id="root"></div>
+
+    {% csrf_token %}
+
+    <div id="areas">
+        {% if areas %}
+            {% for area in areas %}
+                <div>
+                    <h3>{{area.name}}</h3>
+                    {% for goal in area.goals %}
+                        <div>{{goal.title}}</div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <script>
+        let areas = JSON.parse("{{areas|queryset_as_json|escapejs}}")
+        let form = `{% include './components/form_render.html' %}`
+        let urls = {'update_goal': `{% url 'update_goal' 0 %}`, 'delete_goal': `{% url 'delete_goal' 0 %}`}
+
+        var context = {areas, form, urls};
+    </script>
+
+    {% comment %} <div id="footer"></div> {% endcomment %}
+
+    <script src="{% static 'js/areas.bundle.js' %}"></script>
+</body>
+</html>
