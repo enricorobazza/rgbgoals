@@ -43,17 +43,19 @@ class Area(models.Model):
 
 class Goal(models.Model):
     VALUE_TYPES = (('%', 'Porcentagem'), ('F', 'Decimal'), ('I', 'Inteiro'))
+    RECURRECY_TYPES = (('1', 'Diário'), ('7', 'Semanal'), ('15', 'Quinzenal'), ('30', 'Mensal'), ('120', 'Trimestral'), ('180', 'Semestral'), ('365', 'Anual'))
 
     title = models.CharField(max_length=50)
     area = models.ForeignKey(Area, on_delete=models.CASCADE, related_name="goal")
     value = models.FloatField()
     value_type = models.CharField(max_length=1, choices=VALUE_TYPES)
-    due_date = models.DateField(null=True, blank=True)
+    start_date = models.DateField(default=timezone.now)
+    recurrency = models.IntegerField(choices=RECURRECY_TYPES)
 
     class Meta:
         verbose_name_plural = "goals"
         db_table = "goal"
-        ordering = ['due_date', 'area', 'title']
+        ordering = ['start_date', 'area', 'title']
     
     def __str__(self):
         return self.title
@@ -65,7 +67,7 @@ class Goal(models.Model):
             'area': str(self.area), 
             'value': self.value, 
             'value_type': self.value_type, 
-            'due_date': str(self.due_date),
+            'start_date': str(self.start_date),
             'percentage_completed': self.percentage_completed,
             'last_value': self.last_value,
             'has_perm': self.has_perm(user) if user is not None else False

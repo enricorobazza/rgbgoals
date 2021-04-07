@@ -8,7 +8,7 @@ class GoalForm(forms.ModelForm):
         model = Goal
         fields = '__all__'
         widgets = {
-            'due_date': DateInput(format=('%Y-%m-%d')),
+            'start_date': DateInput(format=('%Y-%m-%d')),
             # 'area': HiddenInput()
         }
 
@@ -18,7 +18,8 @@ class GoalForm(forms.ModelForm):
         self.fields["area"].label = "Área"
         self.fields["value"].label = "Valor da Meta"
         self.fields["value_type"].label = "Tipo do valor"
-        self.fields["due_date"].label = "Data de Prazo"
+        self.fields["start_date"].label = "Data de Início"
+        self.fields["recurrency"].label = "Recorrência"
         self.fields["area"].widget.attrs['react'] = True
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'
