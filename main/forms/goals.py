@@ -19,7 +19,7 @@ class GoalForm(forms.ModelForm):
         self.fields["value"].label = "Valor da Meta"
         self.fields["value_type"].label = "Tipo do valor"
         self.fields["start_date"].label = "Data de Início"
-        self.fields["recurrency"].label = "Recorrência"
+        self.fields["recurrence"].label = "Recorrência"
         self.fields["area"].widget.attrs['react'] = True
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'form-control'

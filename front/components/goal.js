@@ -52,6 +52,11 @@ const Goal = ({goal: _goal, urls}) => {
             </div>
 
             <ProgressBar percentage={goal.percentage_completed} />
+
+            <div className="goal-info row">
+                <div className="col-12 col-lg-6">Recorrência: {goal.recurrence}</div>
+                <div className="col-12 col-lg-6">Data de Início: {goal.start_date}</div>
+            </div>
             
             <div className="d-flex justify-content-end mt-3">
                 {goal.has_perm && !showUpdateGoal && <button className="btn btn-primary mr-2" onClick={toggleShowUpdateGoal}><i className="fa fa-pencil-alt"></i></button>}

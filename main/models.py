@@ -50,7 +50,7 @@ class Goal(models.Model):
     value = models.FloatField()
     value_type = models.CharField(max_length=1, choices=VALUE_TYPES)
     start_date = models.DateField(default=timezone.now)
-    recurrency = models.IntegerField(choices=RECURRECY_TYPES)
+    recurrence = models.IntegerField(choices=RECURRECY_TYPES)
 
     class Meta:
         verbose_name_plural = "goals"
@@ -70,7 +70,8 @@ class Goal(models.Model):
             'start_date': str(self.start_date),
             'percentage_completed': self.percentage_completed,
             'last_value': self.last_value,
-            'has_perm': self.has_perm(user) if user is not None else False
+            'has_perm': self.has_perm(user) if user is not None else False,
+            'recurrence': self.get_recurrence_display()
         }
 
     @property
