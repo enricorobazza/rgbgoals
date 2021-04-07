@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
+import django_heroku
 
 from pathlib import Path
 import os
@@ -26,7 +27,7 @@ SECRET_KEY = 's4dua87@cf6ko5@n=ublc%r=&@13y5#@j#mk2#u=nguge2^5sc'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
