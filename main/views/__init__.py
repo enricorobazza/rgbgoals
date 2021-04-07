@@ -14,6 +14,7 @@ class IndexView:
 
             if form.is_valid():
                 form.save()
+                return redirect('index')
         else:
             form = GoalForm()
 
