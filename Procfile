@@ -1,0 +1,1 @@
+web: gunicorn rgbgoals.wsgi:application --log-file -
