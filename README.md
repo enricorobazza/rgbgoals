@@ -14,9 +14,7 @@ This project utilizes Webpack to bundle React components and insert the bundles 
 ## Preview:
 ![RGB Goals Preview](./readme/preview.png)
 
-![RGB Goals Preview - Insert Goal](./readme/add_goal.gif =250x)
-
-![RGB Goals Preview - Update Goal](./readme/update_goal.gif =250x)
+<img src="./readme/add_goal.gif" alt="RGB Goals Preview - Insert Goal" width="300"/> <img src="./readme/update_goal.gif" alt="RGB Goals Preview - Update Goal" width="300"/>
 
 ## Live:
 [https://rgbgoals.herokuapp.com/](https://rgbgoals.herokuapp.com/)
