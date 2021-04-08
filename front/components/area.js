@@ -13,14 +13,14 @@ const Area = ({area, form, urls}) => {
     }
 
     return (
-        <div className="area-container col-6">
+        <div className="area-container col-12 col-sm-6">
             <div className="area pb-1">
                 <div className="title d-flex align-items-center">
                     <img width="40px" height="40px" src={`/static/images/icons/${area.icon}`} />
                     <h4 className="d-inline m-0 ml-2 flex-grow-1">{`${area.name} : ${Math.round(area.percentage_completed * 100)}%`}</h4>
                     {area.has_perm && <button className="btn btn-dark" onClick={toggleShowAddGoal}>
                         <span className="d-none d-md-block">{showAddGoal ? "Cancelar" : "Inserir nova Meta"}</span>
-                        <span className="d-block d-md-none"><i className="fa fa-plus"></i></span>
+                        <span className="d-block d-md-none">{showAddGoal ? <i class="fas fa-arrow-up"></i> : <i className="fa fa-plus"></i>}</span>
                     </button>}
                 </div>
 
